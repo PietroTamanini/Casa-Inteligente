@@ -21,3 +21,10 @@ Projeto de automação residencial desenvolvido com Arduino UNO, utilizando cont
 ## Objetivo
 
 Desenvolver um protótipo funcional de Casa Inteligente para a unidade curricular de Internet das Coisas do SENAI.
+
+
+## Simulação no Wokwi
+
+O projeto pode ser executado e testado no simulador Wokwi.
+
+[Executar Casa Inteligente no Wokwi](https://wokwi.com/projects/480424726963886081)
