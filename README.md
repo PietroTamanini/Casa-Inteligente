@@ -14,7 +14,7 @@ O projeto integra identificação, atuação e monitoramento local em uma demons
 
 - O leitor RC522 concede acesso à TAG `01:02:03:04` e sinaliza a recusa de outros cartões.
 - O servo SG90 abre a porta a 90° e retorna a 0° após cinco segundos da última autorização.
-- Os LEDs verde e vermelho e o buzzer indicam o resultado da leitura.
+- Um LED verde avulso indica acesso autorizado. Um LED vermelho avulso indica acesso negado. O buzzer sinaliza os dois resultados.
 - O interruptor controla o LED branco que representa a iluminação da sacada.
 - O ST7735 apresenta os estados da porta e da iluminação, além de avisos de acesso.
 
@@ -24,7 +24,7 @@ Um Arduino UNO R3, um TFT ST7735, um leitor RC522, um servo SG90, três LEDs (ve
 
 ## Esquema elétrico e pinagem
 
-![Esquema elétrico do Arduino UNO, RFID, TFT, servo, LEDs, buzzer e interruptor](imagens/esquema.png)
+![Esquema elétrico do Arduino UNO, RFID, TFT, servo, LEDs, buzzer e interruptor](imagens/esquema.png?v=leds-avulsos)
 
 | Arduino UNO | Conexão |
 | --- | --- |
