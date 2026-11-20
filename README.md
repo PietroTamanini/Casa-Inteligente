@@ -4,9 +4,9 @@
 
 Pietro Ramos Tamanini e Henrique Nau
 
-Protótipo de automação residencial com Arduino UNO R3, controle de acesso por RFID, iluminação da sacada e interface local em um TFT ILI9341 de 320 × 240 pixels.
+Protótipo de automação residencial com Arduino UNO R3, controle de acesso por RFID, iluminação da sacada e interface local em um TFT ST7735 de 128 × 160 pixels.
 
-[Documentação Técnica - SA (PDF)](docs/Documenta%C3%A7%C3%A3o%20T%C3%A9cnica%20-%20SA.pdf) · [Apresentação SA (PDF)](docs/Apresenta%C3%A7%C3%A3o%20SA.pdf) · [Simulação no Wokwi](https://wokwi.com/projects/480424726963886081)
+[Documentação Técnica - SA (PDF)](docs/Documenta%C3%A7%C3%A3o%20T%C3%A9cnica%20-%20SA.pdf) · [Apresentação SA (PDF)](docs/Apresenta%C3%A7%C3%A3o%20SA.pdf)
 
 ## Objetivo e funcionalidades
 
@@ -16,11 +16,11 @@ O projeto integra identificação, atuação e monitoramento local em uma demons
 - O servo SG90 abre a porta a 90° e retorna a 0° após cinco segundos da última autorização.
 - Os LEDs verde e vermelho e o buzzer indicam o resultado da leitura.
 - O interruptor controla o LED branco que representa a iluminação da sacada.
-- O ILI9341 apresenta os estados da porta e da iluminação, além de avisos de acesso.
+- O ST7735 apresenta os estados da porta e da iluminação, além de avisos de acesso.
 
 ## Componentes
 
-Um Arduino UNO R3, um TFT ILI9341, um leitor RC522, um servo SG90, três LEDs (verde, vermelho e branco), três resistores de 330 Ω, um interruptor deslizante, um buzzer piezoelétrico, uma meia protoboard, fios e cartões RFID para teste.
+Um Arduino UNO R3, um TFT ST7735, um leitor RC522, um servo SG90, três LEDs (verde, vermelho e branco), três resistores de 330 Ω, um interruptor deslizante, um buzzer piezoelétrico, uma meia protoboard, fios e cartões RFID para teste.
 
 ## Esquema elétrico e pinagem
 
@@ -37,28 +37,28 @@ Um Arduino UNO R3, um TFT ILI9341, um leitor RC522, um servo SG90, três LEDs (v
 | D9 | RC522 RST |
 | D10 | RC522 SDA/SS |
 | D11 | MOSI do RC522 e do TFT |
-| D12 | MISO do RC522 e do TFT |
+| D12 | MISO do RC522 |
 | D13 | SCK do RC522 e do TFT |
-| A0 | TFT CS |
+| A0 | TFT RST |
 | A1 | TFT D/C |
-| 5 V | V+ do servo, VCC e LED do TFT no Wokwi |
+| A2 | TFT CS |
+| 5 V | V+ do servo e VCC do chip ST7735 simulado |
 | 3,3 V | Alimentação do RC522 |
 | GND.2 | Terra comum dos módulos, LEDs, buzzer e interruptor |
 
-O RC522 e o TFT compartilham o SPI com pinos CS independentes. Para montagem física, confira as tensões e a compatibilidade dos sinais de cada módulo antes de usar as ligações da simulação.
+O RC522 e o TFT compartilham MOSI e SCK, com pinos CS independentes. Na bancada, use as tensões de alimentação e iluminação indicadas para o módulo ST7735 adquirido. Use 5 V e sinais diretos do UNO somente em módulos compatíveis com esses níveis.
 
 ## Software e bibliotecas
 
-O firmware é escrito em C++ para Arduino. O SPI faz parte do núcleo Arduino AVR. O arquivo [libraries.txt](libraries.txt) lista MFRC522, Servo, Adafruit ILI9341 e Adafruit GFX Library.
+O firmware é escrito em C++ para Arduino. O SPI faz parte do núcleo Arduino AVR. O arquivo [libraries.txt](libraries.txt) lista MFRC522, Servo, Adafruit ST7735 and ST7789 Library e Adafruit GFX Library.
 
 ## Como simular
 
-1. Abra o [projeto no Wokwi](https://wokwi.com/projects/480424726963886081) e clique em **Start Simulation**.
+1. Abra um [projeto Arduino UNO no Wokwi](https://wokwi.com/projects/new/arduino-uno), copie o conteúdo de `sketch.ino`, `diagram.json` e `libraries.txt` para as abas correspondentes e clique em **Start Simulation**. O diagrama usa o [componente ST7735 para Wokwi](https://github.com/martysweet/st7735-wokwi-chip).
 2. Clique no módulo RC522 e apresente o cartão azul, UID `01:02:03:04`. Observe o LED verde, o buzzer, o servo e o TFT.
 3. Aguarde cinco segundos e observe o fechamento. Apresente outro cartão e observe a sinalização de recusa.
 4. Mova o interruptor e compare o LED branco com o painel **LUZ DA SACADA**. O monitor serial registra as leituras a 9.600 bit/s.
 
-A documentação técnica da SA descreve uma montagem com TFT ST7735. A pinagem acima corresponde ao circuito ILI9341 que está no repositório.
 
 ## Estrutura e versionamento
 
