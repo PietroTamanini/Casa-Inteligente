@@ -1,18 +1,19 @@
-## 02 — Objetivo
+## 01 — Objetivo do projeto
 
 ### Objetivo geral
 
-Desenvolver um protótipo didático de automação residencial que integre controle de acesso à porta e comando da iluminação da sacada em um Arduino UNO R3, com indicação local no display TFT ILI9341.
+Desenvolver um protótipo de casa inteligente utilizando Arduino UNO e tecnologia RFID para demonstrar o controle de acesso a uma residência. O sistema identifica cartões, aciona a porta por servo motor, controla a luz da sacada por interruptor e apresenta os estados no display TFT ILI9341.
 
 ### Objetivos específicos
 
-- Identificar cartões pelo UID e liberar somente a TAG 01:02:03:04.
-- Acionar a porta com um servo e fechá-la automaticamente após cinco segundos.
-- Sinalizar acessos autorizados e negados com LEDs, buzzer e mensagens no TFT.
-- Controlar a luz da sacada com um interruptor e apresentar seu estado na tela.
+- Aplicar a leitura e validação de cartões RFID para distinguir acessos autorizados e negados. A TAG cadastrada é 01:02:03:04.
+- Utilizar um servo motor SG90 para representar a abertura da porta e o fechamento automático após cinco segundos.
+- Empregar LEDs, buzzer e display TFT como recursos de sinalização e apresentação de informações.
+- Comandar a luz da sacada com um interruptor e acompanhar seu estado na tela.
+- Integrar conceitos de eletrônica, programação embarcada e automação residencial em um protótipo didático de Internet das Coisas.
 
-## 03 — Justificativa
+## 02 — Justificativa
 
-A automação residencial reduz tarefas repetitivas e facilita a consulta ao estado de portas e luzes. Neste protótipo, a identificação por cartão restringe a abertura a um UID cadastrado, e os sinais visuais e sonoros tornam o resultado perceptível no ponto de acesso.
+O projeto foi escolhido para demonstrar uma aplicação da tecnologia RFID no controle de acesso residencial. A identificação automática e o acionamento da porta tornam a operação mais prática, enquanto as indicações na tela, nos LEDs e no buzzer ajudam a perceber o resultado de cada leitura. O controle da luz da sacada ilustra como a automação pode facilitar tarefas do dia a dia.
 
-A atividade aplica conceitos de Internet das Coisas ao integrar entrada de dados, processamento, comunicação entre periféricos e atuação. O protótipo opera localmente, sem conectividade de rede. A comparação de UID é um recurso didático, pois identificadores podem ser copiados. O estado da porta no display representa o comando enviado ao servo, sem sensor de posição.
+O protótipo opera localmente, sem conectividade de rede. A comparação de UID é um recurso didático, pois identificadores podem ser copiados. O estado da porta no display representa o comando enviado ao servo, sem sensor de posição.

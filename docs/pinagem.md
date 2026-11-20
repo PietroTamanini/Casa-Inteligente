@@ -1,4 +1,4 @@
-## 07 — Tabela de pinagem
+## 05 — Mapeamento de conexões
 
 | Arduino UNO | Ligação | Função |
 | --- | --- | --- |

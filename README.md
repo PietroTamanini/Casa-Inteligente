@@ -6,7 +6,7 @@ Pietro Ramos Tamanini e Henrique Nau
 
 Protótipo de automação residencial com Arduino UNO R3, controle de acesso por RFID, iluminação da sacada e interface local em um TFT ILI9341 de 320 × 240 pixels.
 
-[Documentação em PDF](docs/Documentacao_Casa_Inteligente.pdf) · [Documento editável](docs/Documentacao_Casa_Inteligente.docx) · [Simulação no Wokwi](https://wokwi.com/projects/480424726963886081)
+[Documentação Técnica - SA (PDF)](docs/Documentacao_Casa_Inteligente.pdf) · [Documento editável](docs/Documentacao_Casa_Inteligente.docx) · [Simulação no Wokwi](https://wokwi.com/projects/480424726963886081)
 
 ## Objetivo e funcionalidades
 
