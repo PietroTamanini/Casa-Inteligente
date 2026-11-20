@@ -1,0 +1,6 @@
+/build/
+*.hex
+*.elf
+*.map
+*.zip
+~$*.docx
