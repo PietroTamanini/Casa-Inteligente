@@ -68,7 +68,7 @@
       "attrs": { "value": "330" }
     },
     { "type": "wokwi-slide-switch", "id": "sw1", "top": 62, "left": 579.1, "attrs": {} },
-    { "type": "wokwi-ili9341", "id": "lcd2", "top": -335.2, "left": 335.7, "attrs": {} }
+    { "type": "chip-st7735", "id": "lcd2", "top": -335.2, "left": 335.7, "attrs": {} }
   ],
   "connections": [
     [ "uno:5V", "bb1:bp.1", "red", [ "v0" ] ],
@@ -114,12 +114,11 @@
     [ "sw1:3", "bb1:26t.e", "", [ "$bb" ] ],
     [ "lcd2:VCC", "bb1:tp.2", "red", [ "v0" ] ],
     [ "bb1:tn.2", "lcd2:GND", "black", [ "v0" ] ],
-    [ "lcd2:CS", "uno:A0", "green", [ "v0" ] ],
-    [ "lcd2:D/C", "uno:A1", "green", [ "v0" ] ],
+    [ "lcd2:CS", "uno:A2", "green", [ "v0" ] ],
+    [ "lcd2:DC", "uno:A1", "green", [ "v0" ] ],
     [ "lcd2:MOSI", "uno:11", "green", [ "v0" ] ],
     [ "lcd2:SCK", "uno:13", "green", [ "v0" ] ],
-    [ "lcd2:MISO", "uno:12", "green", [ "v0" ] ],
-    [ "lcd2:LED", "uno:5V", "green", [ "v0" ] ]
+    [ "lcd2:RST", "uno:A0", "purple", [ "v0" ] ]
   ],
-  "dependencies": {}
+  "dependencies": { "chip-st7735": "github:martysweet/st7735-wokwi-chip@1.0.4" }
 }

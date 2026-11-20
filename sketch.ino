@@ -2,7 +2,7 @@
 #include <SPI.h>
 #include <MFRC522.h>
 #include <Adafruit_GFX.h>
-#include <Adafruit_ILI9341.h>
+#include <Adafruit_ST7735.h>
 #include <Servo.h>
 
 const byte SERVO_PORTA = 3;
@@ -13,7 +13,8 @@ const byte INTERRUPTOR = 7;
 const byte BUZZER = 8;
 const byte RFID_RST = 9;
 const byte RFID_SDA_SS = 10;
-const byte TFT_CS = A0;
+const byte TFT_RST = A0;
+const byte TFT_CS = A2;
 const byte TFT_DC = A1;
 
 const byte UID_AUTORIZADO[] = {0x01, 0x02, 0x03, 0x04};
@@ -30,7 +31,7 @@ const uint16_t COR_RODAPE = 0x1082;
 const uint16_t COR_CINZA = 0xBDF7;
 
 MFRC522 rfid(RFID_SDA_SS, RFID_RST);
-Adafruit_ILI9341 tela(TFT_CS, TFT_DC);
+Adafruit_ST7735 tela(TFT_CS, TFT_DC, TFT_RST);
 Servo porta;
 
 bool portaAberta = false;
@@ -48,18 +49,17 @@ bool estadoEstavelInterruptor = HIGH;
 unsigned long instanteMudancaInterruptor = 0;
 
 void mostrarRodape(const char *linha1, const char *linha2, uint16_t cor) {
-  tela.fillRect(0, 207, 320, 33, COR_RODAPE);
-  tela.drawFastHLine(0, 207, 320, 0x29A5);
+  tela.fillRect(0, 102, tela.width(), tela.height() - 102, COR_RODAPE);
+  tela.drawFastHLine(0, 102, tela.width(), 0x29A5);
 
   tela.setTextWrap(false);
-  tela.setTextSize(2);
+  tela.setTextSize(1);
   tela.setTextColor(cor);
-  tela.setCursor(12, 211);
+  tela.setCursor(8, 106);
   tela.print(linha1);
 
-  tela.setTextSize(1);
-  tela.setTextColor(ILI9341_WHITE);
-  tela.setCursor(12, 230);
+  tela.setTextColor(ST7735_WHITE);
+  tela.setCursor(8, 117);
   tela.print(linha2);
 }
 
@@ -74,56 +74,57 @@ void mostrarEstadoNormal() {
   mostrarRodape(
     "SISTEMA PRONTO",
     portaAberta ? "Porta aberta" : "Aproxime um cartao",
-    ILI9341_CYAN
+    ST7735_CYAN
   );
 }
 
 void desenharCartao(int16_t y, const char *titulo, const char *estado, uint16_t cor) {
-  tela.fillRoundRect(10, y, 300, 72, 10, COR_CARTAO);
-  tela.drawRoundRect(10, y, 300, 72, 10, 0x39A7);
-  tela.fillCircle(279, y + 36, 11, cor);
+  tela.fillRoundRect(5, y, tela.width() - 10, 37, 6, COR_CARTAO);
+  tela.drawRoundRect(5, y, tela.width() - 10, 37, 6, 0x39A7);
+  tela.fillCircle(tela.width() - 19, y + 19, 5, cor);
 
   tela.setTextWrap(false);
-  tela.setTextSize(2);
-  tela.setTextColor(ILI9341_WHITE);
-  tela.setCursor(24, y + 11);
+  tela.setTextSize(1);
+  tela.setTextColor(ST7735_WHITE);
+  tela.setCursor(12, y + 5);
   tela.print(titulo);
 
   tela.setTextColor(cor);
-  tela.setCursor(24, y + 40);
+  tela.setTextSize(2);
+  tela.setCursor(12, y + 16);
   tela.print(estado);
 }
 
 void atualizarCartaoPorta() {
   desenharCartao(
-    51,
+    22,
     "PORTA",
     portaAberta ? "ABERTA" : "FECHADA",
-    portaAberta ? ILI9341_GREEN : COR_CINZA
+    portaAberta ? ST7735_GREEN : COR_CINZA
   );
 }
 
 void atualizarCartaoLuz() {
   desenharCartao(
-    131,
+    62,
     "LUZ DA SACADA",
     luzAcesa ? "LIGADA" : "DESLIGADA",
-    luzAcesa ? ILI9341_YELLOW : COR_CINZA
+    luzAcesa ? ST7735_YELLOW : COR_CINZA
   );
 }
 
 void iniciarTela() {
-  tela.begin();
+  tela.initR(INITR_BLACKTAB);
   tela.setRotation(1);
   tela.fillScreen(COR_FUNDO);
 
-  tela.fillRect(0, 0, 320, 42, 0x10A4);
-  tela.drawFastHLine(0, 41, 320, ILI9341_CYAN);
+  tela.fillRect(0, 0, tela.width(), 18, 0x10A4);
+  tela.drawFastHLine(0, 17, tela.width(), ST7735_CYAN);
 
   tela.setTextWrap(false);
-  tela.setTextColor(ILI9341_WHITE);
-  tela.setTextSize(2);
-  tela.setCursor(18, 13);
+  tela.setTextColor(ST7735_WHITE);
+  tela.setTextSize(1);
+  tela.setCursor(8, 5);
   tela.print("CASA INTELIGENTE");
 
   atualizarCartaoPorta();
@@ -142,7 +143,7 @@ void abrirPorta() {
   digitalWrite(LED_VERMELHO, LOW);
 
   atualizarCartaoPorta();
-  mostrarAviso("ACESSO LIBERADO", "Porta aberta", ILI9341_GREEN);
+  mostrarAviso("ACESSO LIBERADO", "Porta aberta", ST7735_GREEN);
 
   tone(BUZZER, 1800, 130);
 
@@ -156,7 +157,7 @@ void fecharPorta() {
   digitalWrite(LED_VERDE, LOW);
 
   atualizarCartaoPorta();
-  mostrarAviso("PORTA FECHADA", "Aproxime um cartao", ILI9341_WHITE);
+  mostrarAviso("PORTA FECHADA", "Aproxime um cartao", ST7735_WHITE);
 
   Serial.println(F("Porta fechada"));
 }
@@ -206,7 +207,7 @@ void verificarRFID() {
     mostrarAviso(
       "ACESSO NEGADO",
       "Cartao nao autorizado",
-      ILI9341_RED
+      ST7735_RED
     );
 
     Serial.println(F("ACESSO NEGADO"));
@@ -244,7 +245,7 @@ void verificarInterruptor() {
     mostrarAviso(
       "LUZ DA SACADA",
       luzAcesa ? "Ligada" : "Desligada",
-      ILI9341_YELLOW
+      ST7735_YELLOW
     );
 
     Serial.println(
@@ -288,7 +289,7 @@ void setup() {
   iniciarTela();
   rfid.PCD_Init();
 
-  Serial.println(F("Casa inteligente pronta (ILI9341)!"));
+  Serial.println(F("Casa inteligente pronta (ST7735)!"));
   Serial.println(F("No Wokwi, clique no RC522 e apresente um cartao."));
   Serial.println(F("Cartao azul = 01:02:03:04 (autorizado)."));
 }
@@ -312,7 +313,7 @@ void loop() {
   }
 
   if (avisoTelaAtivo &&
-      (agora - instanteAvisoTela >= TEMPO_AVISO_TELA)) {
+      (millis() - instanteAvisoTela >= TEMPO_AVISO_TELA)) {
     mostrarEstadoNormal();
   }
 }

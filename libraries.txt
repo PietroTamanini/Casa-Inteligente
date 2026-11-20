@@ -3,5 +3,5 @@
 
 MFRC522
 Servo
-Adafruit ILI9341
+Adafruit ST7735 and ST7789 Library
 Adafruit GFX Library
