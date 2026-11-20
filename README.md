@@ -6,7 +6,7 @@ Pietro Ramos Tamanini e Henrique Nau
 
 Protótipo de automação residencial com Arduino UNO R3, controle de acesso por RFID, iluminação da sacada e interface local em um TFT ILI9341 de 320 × 240 pixels.
 
-[Documentação Técnica - SA (PDF)](docs/Documentacao_Casa_Inteligente.pdf) · [Simulação no Wokwi](https://wokwi.com/projects/480424726963886081)
+[Documentação Técnica - SA (PDF)](docs/Documenta%C3%A7%C3%A3o%20T%C3%A9cnica%20-%20SA.pdf) · [Apresentação SA (PDF)](docs/Apresenta%C3%A7%C3%A3o%20SA.pdf) · [Simulação no Wokwi](https://wokwi.com/projects/480424726963886081)
 
 ## Objetivo e funcionalidades
 
@@ -45,7 +45,7 @@ Um Arduino UNO R3, um TFT ILI9341, um leitor RC522, um servo SG90, três LEDs (v
 | 3,3 V | Alimentação do RC522 |
 | GND.2 | Terra comum dos módulos, LEDs, buzzer e interruptor |
 
-O RC522 e o TFT compartilham o SPI com pinos CS independentes. Para montagem física, confira as tensões e a compatibilidade dos sinais de cada módulo antes de usar as ligações da simulação. Os cuidados de alimentação e conversão de nível estão na seção de esquema elétrico do PDF.
+O RC522 e o TFT compartilham o SPI com pinos CS independentes. Para montagem física, confira as tensões e a compatibilidade dos sinais de cada módulo antes de usar as ligações da simulação.
 
 ## Software e bibliotecas
 
@@ -58,7 +58,7 @@ O firmware é escrito em C++ para Arduino. O SPI faz parte do núcleo Arduino AV
 3. Aguarde cinco segundos e observe o fechamento. Apresente outro cartão e observe a sinalização de recusa.
 4. Mova o interruptor e compare o LED branco com o painel **LUZ DA SACADA**. O monitor serial registra as leituras a 9.600 bit/s.
 
-O PDF registra os testes realizados e inclui o roteiro de reprodução.
+A documentação técnica da SA descreve uma montagem com TFT ST7735. A pinagem acima corresponde ao circuito ILI9341 que está no repositório.
 
 ## Estrutura e versionamento
 
@@ -67,7 +67,7 @@ Casa-Inteligente/
 ├── sketch.ino           Firmware Arduino
 ├── diagram.json         Circuito Wokwi
 ├── libraries.txt        Bibliotecas do simulador
-├── docs/                Documentação final em PDF
+├── docs/                Documentação e apresentação em PDF
 ├── imagens/             Esquema elétrico em PNG
 ├── .gitignore
 └── README.md
