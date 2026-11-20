@@ -6,7 +6,7 @@ Pietro Ramos Tamanini e Henrique Nau
 
 Protótipo de automação residencial com Arduino UNO R3, controle de acesso por RFID, iluminação da sacada e interface local em um TFT ST7735 de 128 × 160 pixels.
 
-[Documentação Técnica - SA (PDF)](docs/Documenta%C3%A7%C3%A3o%20T%C3%A9cnica%20-%20SA.pdf) · [Apresentação SA (PDF)](docs/Apresenta%C3%A7%C3%A3o%20SA.pdf)
+[Documentação Técnica - SA (PDF)](docs/Documenta%C3%A7%C3%A3o%20T%C3%A9cnica%20-%20SA.pdf) · [Apresentação SA (PDF)](docs/Apresenta%C3%A7%C3%A3o%20SA.pdf) · [Simulador (Site)](https://wokwi.com/projects/480424726963886081) 
 
 ## Objetivo e funcionalidades
 
