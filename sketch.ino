@@ -6,8 +6,8 @@
 #include <Servo.h>
 
 const byte SERVO_PORTA = 3;
-const byte LED_VERDE = 4;
-const byte LED_VERMELHO = 5;
+const byte PIN_LED_VERDE_ACESSO = 4;
+const byte PIN_LED_VERMELHO_ACESSO = 5;
 const byte LED_BRANCO = 6;
 const byte INTERRUPTOR = 7;
 const byte BUZZER = 8;
@@ -143,8 +143,8 @@ void abrirPorta() {
 
   avisoVermelhoAtivo = false;
 
-  digitalWrite(LED_VERDE, HIGH);
-  digitalWrite(LED_VERMELHO, LOW);
+  digitalWrite(PIN_LED_VERDE_ACESSO, HIGH);
+  digitalWrite(PIN_LED_VERMELHO_ACESSO, LOW);
 
   atualizarCartaoPorta();
   mostrarAviso("ACESSO LIBERADO", "Porta aberta", COR_VERDE);
@@ -158,7 +158,7 @@ void fecharPorta() {
   porta.write(ANGULO_FECHADO);
   portaAberta = false;
 
-  digitalWrite(LED_VERDE, LOW);
+  digitalWrite(PIN_LED_VERDE_ACESSO, LOW);
 
   atualizarCartaoPorta();
   mostrarAviso("PORTA FECHADA", "Aproxime um cartao", ST7735_WHITE);
@@ -203,7 +203,7 @@ void verificarRFID() {
   if (cartaoAutorizado()) {
     abrirPorta();
   } else {
-    digitalWrite(LED_VERMELHO, HIGH);
+    digitalWrite(PIN_LED_VERMELHO_ACESSO, HIGH);
 
     avisoVermelhoAtivo = true;
     instanteNegado = millis();
@@ -263,14 +263,14 @@ void verificarInterruptor() {
 void setup() {
   Serial.begin(9600);
 
-  pinMode(LED_VERDE, OUTPUT);
-  pinMode(LED_VERMELHO, OUTPUT);
+  pinMode(PIN_LED_VERDE_ACESSO, OUTPUT);
+  pinMode(PIN_LED_VERMELHO_ACESSO, OUTPUT);
   pinMode(LED_BRANCO, OUTPUT);
   pinMode(BUZZER, OUTPUT);
   pinMode(INTERRUPTOR, INPUT_PULLUP);
 
-  digitalWrite(LED_VERDE, LOW);
-  digitalWrite(LED_VERMELHO, LOW);
+  digitalWrite(PIN_LED_VERDE_ACESSO, LOW);
+  digitalWrite(PIN_LED_VERMELHO_ACESSO, LOW);
 
   ultimaLeituraInterruptor = digitalRead(INTERRUPTOR);
   estadoEstavelInterruptor = ultimaLeituraInterruptor;
@@ -313,7 +313,7 @@ void loop() {
       (agora - instanteNegado >= TEMPO_LED_VERMELHO)) {
 
     avisoVermelhoAtivo = false;
-    digitalWrite(LED_VERMELHO, LOW);
+    digitalWrite(PIN_LED_VERMELHO_ACESSO, LOW);
   }
 
   if (avisoTelaAtivo &&
