@@ -24,7 +24,7 @@ Um Arduino UNO R3, um TFT ST7735, um leitor RC522, um servo SG90, três LEDs (ve
 
 ## Esquema elétrico e pinagem
 
-![Esquema elétrico do Arduino UNO, RFID, TFT, servo, LEDs, buzzer e interruptor](imagens/esquema-original-st7735.png)
+![Esquema elétrico do Arduino UNO, RFID, TFT, servo, LEDs, buzzer e interruptor](imagens/esquema.png)
 
 | Arduino UNO | Conexão |
 | --- | --- |
