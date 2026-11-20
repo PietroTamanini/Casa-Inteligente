@@ -25,10 +25,14 @@ const unsigned long TEMPO_PORTA_ABERTA = 5000UL;
 const unsigned long TEMPO_LED_VERMELHO = 1500UL;
 const unsigned long TEMPO_AVISO_TELA = 1800UL;
 
-const uint16_t COR_FUNDO = 0x0841;
-const uint16_t COR_CARTAO = 0x18E3;
-const uint16_t COR_RODAPE = 0x1082;
-const uint16_t COR_CINZA = 0xBDF7;
+const uint16_t COR_FUNDO = 0x0000;
+const uint16_t COR_CARTAO = 0x2A2A;
+const uint16_t COR_RODAPE = 0x2929;
+const uint16_t COR_CINZA = 0xB5B5;
+const uint16_t COR_CIANO = 0x1F1F;
+const uint16_t COR_VERDE = 0x0707;
+const uint16_t COR_VERMELHO = 0xE0E0;
+const uint16_t COR_AMARELO = 0xE7E7;
 
 MFRC522 rfid(RFID_SDA_SS, RFID_RST);
 Adafruit_ST7735 tela(TFT_CS, TFT_DC, TFT_RST);
@@ -50,7 +54,7 @@ unsigned long instanteMudancaInterruptor = 0;
 
 void mostrarRodape(const char *linha1, const char *linha2, uint16_t cor) {
   tela.fillRect(0, 102, tela.width(), tela.height() - 102, COR_RODAPE);
-  tela.drawFastHLine(0, 102, tela.width(), 0x29A5);
+  tela.drawFastHLine(0, 102, tela.width(), 0x3333);
 
   tela.setTextWrap(false);
   tela.setTextSize(1);
@@ -74,13 +78,13 @@ void mostrarEstadoNormal() {
   mostrarRodape(
     "SISTEMA PRONTO",
     portaAberta ? "Porta aberta" : "Aproxime um cartao",
-    ST7735_CYAN
+    COR_CIANO
   );
 }
 
 void desenharCartao(int16_t y, const char *titulo, const char *estado, uint16_t cor) {
   tela.fillRoundRect(5, y, tela.width() - 10, 37, 6, COR_CARTAO);
-  tela.drawRoundRect(5, y, tela.width() - 10, 37, 6, 0x39A7);
+  tela.drawRoundRect(5, y, tela.width() - 10, 37, 6, 0x3333);
   tela.fillCircle(tela.width() - 19, y + 19, 5, cor);
 
   tela.setTextWrap(false);
@@ -100,7 +104,7 @@ void atualizarCartaoPorta() {
     22,
     "PORTA",
     portaAberta ? "ABERTA" : "FECHADA",
-    portaAberta ? ST7735_GREEN : COR_CINZA
+    portaAberta ? COR_VERDE : COR_CINZA
   );
 }
 
@@ -109,7 +113,7 @@ void atualizarCartaoLuz() {
     62,
     "LUZ DA SACADA",
     luzAcesa ? "LIGADA" : "DESLIGADA",
-    luzAcesa ? ST7735_YELLOW : COR_CINZA
+    luzAcesa ? COR_AMARELO : COR_CINZA
   );
 }
 
@@ -118,8 +122,8 @@ void iniciarTela() {
   tela.setRotation(1);
   tela.fillScreen(COR_FUNDO);
 
-  tela.fillRect(0, 0, tela.width(), 18, 0x10A4);
-  tela.drawFastHLine(0, 17, tela.width(), ST7735_CYAN);
+  tela.fillRect(0, 0, tela.width(), 18, COR_RODAPE);
+  tela.drawFastHLine(0, 17, tela.width(), COR_CIANO);
 
   tela.setTextWrap(false);
   tela.setTextColor(ST7735_WHITE);
@@ -143,7 +147,7 @@ void abrirPorta() {
   digitalWrite(LED_VERMELHO, LOW);
 
   atualizarCartaoPorta();
-  mostrarAviso("ACESSO LIBERADO", "Porta aberta", ST7735_GREEN);
+  mostrarAviso("ACESSO LIBERADO", "Porta aberta", COR_VERDE);
 
   tone(BUZZER, 1800, 130);
 
@@ -207,7 +211,7 @@ void verificarRFID() {
     mostrarAviso(
       "ACESSO NEGADO",
       "Cartao nao autorizado",
-      ST7735_RED
+      COR_VERMELHO
     );
 
     Serial.println(F("ACESSO NEGADO"));
@@ -245,7 +249,7 @@ void verificarInterruptor() {
     mostrarAviso(
       "LUZ DA SACADA",
       luzAcesa ? "Ligada" : "Desligada",
-      ST7735_YELLOW
+      COR_AMARELO
     );
 
     Serial.println(
