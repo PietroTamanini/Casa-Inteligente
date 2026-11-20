@@ -1,4 +1,4 @@
-## 04 — Lista de componentes
+## 03 — Lista de componentes
 
 | ID no Wokwi | Componente / modelo | Qtde. | Função |
 | --- | --- | --- | --- |
