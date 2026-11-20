@@ -6,7 +6,7 @@ Pietro Ramos Tamanini e Henrique Nau
 
 Protótipo de automação residencial com Arduino UNO R3, controle de acesso por RFID, iluminação da sacada e interface local em um TFT ILI9341 de 320 × 240 pixels.
 
-[Documentação Técnica - SA (PDF)](docs/Documentacao_Casa_Inteligente.pdf) · [Documento editável](docs/Documentacao_Casa_Inteligente.docx) · [Simulação no Wokwi](https://wokwi.com/projects/480424726963886081)
+[Documentação Técnica - SA (PDF)](docs/Documentacao_Casa_Inteligente.pdf) · [Simulação no Wokwi](https://wokwi.com/projects/480424726963886081)
 
 ## Objetivo e funcionalidades
 
@@ -20,13 +20,11 @@ O projeto integra identificação, atuação e monitoramento local em uma demons
 
 ## Componentes
 
-Um Arduino UNO R3, um TFT ILI9341, um leitor RC522, um servo SG90, três LEDs (verde, vermelho e branco), três resistores de 330 Ω, um interruptor deslizante, um buzzer piezoelétrico, uma meia protoboard, fios e cartões RFID para teste. A [lista de componentes](docs/componentes.md) relaciona os identificadores do Wokwi.
+Um Arduino UNO R3, um TFT ILI9341, um leitor RC522, um servo SG90, três LEDs (verde, vermelho e branco), três resistores de 330 Ω, um interruptor deslizante, um buzzer piezoelétrico, uma meia protoboard, fios e cartões RFID para teste.
 
 ## Esquema elétrico e pinagem
 
-![Esquema elétrico do Arduino UNO, RFID, TFT, servo, LEDs, buzzer e interruptor](imagens/esquematico.svg)
-
-[Versão em PNG](imagens/esquematico.png) · [Pinagem completa](docs/pinagem.md)
+![Esquema elétrico do Arduino UNO, RFID, TFT, servo, LEDs, buzzer e interruptor](imagens/esquematico.png)
 
 | Arduino UNO | Conexão |
 | --- | --- |
@@ -60,7 +58,7 @@ O firmware é escrito em C++ para Arduino. O SPI faz parte do núcleo Arduino AV
 3. Aguarde cinco segundos e observe o fechamento. Apresente outro cartão e observe a sinalização de recusa.
 4. Mova o interruptor e compare o LED branco com o painel **LUZ DA SACADA**. O monitor serial registra as leituras a 9.600 bit/s.
 
-O [roteiro de testes](docs/testes.md) registra a validação realizada e os casos funcionais.
+O PDF registra os testes realizados e inclui o roteiro de reprodução.
 
 ## Estrutura e versionamento
 
@@ -69,8 +67,8 @@ Casa-Inteligente/
 ├── sketch.ino           Firmware Arduino
 ├── diagram.json         Circuito Wokwi
 ├── libraries.txt        Bibliotecas do simulador
-├── docs/                PDF, DOCX e notas técnicas
-├── imagens/             Esquema em SVG e PNG
+├── docs/                Documentação final em PDF
+├── imagens/             Esquema elétrico em PNG
 ├── .gitignore
 └── README.md
 ```
